@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KN Group of School - Full Website Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0B4A99;
+            --secondary-color: #2ECC71;
+            --accent-color: #F1C40F;
+            --bg-color: #F9F9F9;
+            --text-color: #333333;
+            --heading-font: 'Poppins', sans-serif;
+            --body-font: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Reusable Components --- */
+        .btn {
+            background-color: var(--accent-color); color: white; padding: 12px 28px;
+            border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;
+            display: inline-block; transition: all 0.3s ease; border: none; cursor: pointer;
+        }
+        .btn-primary {
+             background-color: var(--primary-color);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn:hover {
+             transform: translateY(-3px);
+             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            text-align: center; font-family: var(--heading-font);
+            font-size: 36px; margin-top: 0; margin-bottom: 50px; color: var(--primary-color);
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-left: 20px;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            background-color: #f0f2f5;
+        }
+        
+        nav a.login-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+        }
+         nav a.login-btn:hover {
+            background-color: #e2b30e;
+        }
+        
+        #nav-logged-out, #nav-logged-in { display: block; }
+        #nav-logged-in { display: none; }
+
+
+        /* --- Page Content --- */
+        .page {
+            display: none; /* Pages are hidden by default */
+        }
+        .page.active {
+            display: block; /* The active page is shown */
+        }
+        
+        .page-full {
+             min-height: calc(100vh - 80px); /* Full screen minus header */
+        }
+
+        /* Hero Section (Homepage) */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(11, 74, 153, 0.6), rgba(11, 74, 153, 0.6)), url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200') no-repeat center center;
+            background-size: cover;
+            color: white;
+        }
+        .hero h1 { font-family: var(--heading-font); font-size: 48px; margin-top: 0; margin-bottom: 20px; font-weight: 700; }
+        .hero p { font-size: 18px; max-width: 600px; margin: 0 auto 30px; }
+        
+        /* Features Section (Homepage) */
+        .features-section { padding: 80px 0; background-color: #FFF;}
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .feature-card {
+            padding: 40px 30px; text-align: center; border-radius: 12px;
+            color: white; box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-card.green { background-color: var(--secondary-color); }
+        .feature-card.yellow { background-color: var(--accent-color); }
+        .feature-card svg { width: 50px; height: 50px; margin-bottom: 15px; }
+        .feature-card h3 { font-family: var(--heading-font); margin: 10px 0; }
+        
+        /* Testimonials Section (Homepage) */
+        .testimonials-section { padding: 80px 0; background-color: var(--bg-color); }
+        .testimonial-container {
+            position: relative;
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+            text-align: center;
+        }
+        .testimonial-card {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+        }
+        .testimonial-card.active {
+            display: block;
+        }
+        .testimonial-card img {
+            width: 100px; height: 100px; border-radius: 50%;
+            object-fit: cover; margin-bottom: 15px; border: 4px solid var(--primary-color);
+        }
+        .testimonial-card p { font-style: italic; color: #555; font-size: 18px; }
+        .testimonial-card h4 { font-family: var(--heading-font); margin: 10px 0 0 0; color: var(--primary-color); }
+        .testimonial-nav {
+            position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%);
+        }
+        .testimonial-nav button {
+            background: white; border: none; border-radius: 50%; width: 40px; height: 40px;
+            cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-size: 20px;
+        }
+
+        /* --- Generic Page Styles --- */
+        .page-content-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        .page-content-section.dashboard, .page-content-section.faculty { background-color: var(--bg-color); }
+
+        /* About Page */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;}
+        .about-grid img { width: 100%; border-radius: 12px; }
+
+        /* Academics Page */
+        .academics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .subject-card {
+            background: #fff;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .subject-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .subject-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .subject-card-content { padding: 25px; }
+        .subject-card h3 { margin-top:0; }
+
+        /* Faculty Page */
+        .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .teacher-card {
+            background: #fff; border-radius: 12px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding-top: 30px;
+            overflow: hidden; transition: all 0.3s ease;
+        }
+        .teacher-card:hover { transform: translateY(-10px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .teacher-card img {
+            width: 120px; height: 120px; border-radius: 50%;
+            object-fit: cover; border: 4px solid var(--primary-color);
+        }
+        .teacher-card-content { padding: 20px; }
+        .teacher-card h3 { margin-top: 0; margin-bottom: 5px; }
+        .teacher-card p { color: #777; margin-top: 0; }
+        .teacher-card .btn { border-radius: 0; width: 100%; }
+
+        /* Gallery Page */
+        .gallery-grid { column-count: 3; column-gap: 15px; }
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Admissions & Login Page */
+        .form-container {
+            max-width: 500px; margin: auto; background: white;
+            padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; box-sizing: border-box;
+        }
+
+        /* --- Student Dashboard Page --- */
+        .dashboard-header { text-align: center; margin-bottom: 50px; }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+        }
+        .dashboard-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .dashboard-card h3 { font-family: var(--heading-font); color: var(--primary-color); margin-top: 0; }
+        
+        .live-class-card {
+            grid-column: 1 / -1; /* Spans full width */
+            background: linear-gradient(135deg, var(--primary-color), #3b82f6);
+            color: white;
+            text-align: center;
+        }
+        .live-class-card h3 { color: white; }
+        
+        .homework-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .homework-table th, .homework-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        .homework-table th { font-weight: 600; }
+        .status-submitted { color: var(--secondary-color); font-weight: bold; }
+        .status-pending { color: #f97316; font-weight: bold; }
+
+        .fees-details p { margin: 10px 0; display: flex; justify-content: space-between; }
+        .fees-details span { font-weight: 600; }
+
+        /* --- Live Class Page --- */
+        .live-class-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            padding: 20px;
+            height: calc(100vh - 80px); /* Full screen minus header */
+            box-sizing: border-box;
+        }
+        .video-panel {
+            background: #000;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+        .video-feed {
+            flex-grow: 1;
+            background: url('https://images.unsplash.com/photo-1542744095-291d1f67b221?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000') center center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            position: relative;
+        }
+         .video-feed::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+        .video-feed span { z-index: 1; }
+        .video-controls {
+            background-color: #2c3e50;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .control-btn {
+            background: #34495e; color: white; border: none; border-radius: 50%;
+            width: 50px; height: 50px; font-size: 20px; cursor: pointer;
+        }
+         .control-btn.active { background-color: #e74c3c; }
+
+        .chat-panel {
+            background: #fff;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .chat-panel h3 {
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .chat-message { margin-bottom: 15px; }
+        .chat-message.student .msg-bubble { background: var(--primary-color); color: white; margin-left: auto; border-bottom-right-radius: 5px;}
+        .chat-message.teacher .msg-bubble { background: #ecf0f1; color: #333; margin-right: auto; border-bottom-left-radius: 5px;}
+        .msg-bubble {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 20px;
+        }
+        .msg-sender { font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+        .chat-input input {
+            flex-grow: 1; border: 1px solid #ccc; border-radius: 20px;
+            padding: 10px 15px; font-size: 14px;
+        }
+        .chat-input button {
+            border: none; background: var(--primary-color); color: white;
+            border-radius: 50%; width: 40px; height: 40px; margin-left: 10px; cursor: pointer;
+        }
+        .class-actions {
+            padding: 20px; border-top: 1px solid #eee; display: flex; gap: 10px;
+        }
+        
+        /* Teacher Profile Modal */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 40px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        .modal-close {
+            position: absolute; top: 15px; right: 15px; font-size: 24px;
+            background: none; border: none; cursor: pointer; color: #888;
+        }
+        .profile-photo {
+            text-align: center;
+        }
+        .profile-photo img {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 5px solid var(--primary-color);
+        }
+        .profile-details h2 { margin-top: 0; font-family: var(--heading-font); color: var(--primary-color); }
+        .profile-details p { margin: 8px 0; }
+        .profile-details .tag {
+            display: inline-block; background: #eee; border-radius: 5px; padding: 5px 10px;
+            font-size: 14px; margin-right: 5px;
+        }
+
+
+        /* --- Animations --- */
+        .animated {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0; background-color: var(--primary-color); color: white;
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 {
+            font-family: var(--heading-font); margin-top: 0; margin-bottom: 20px; font-size: 18px;
+            border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; display: inline-block;
+        }
+        .footer-col p, .footer-col a { color: #ddd; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-col a:hover { color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#home" class="logo nav-link">KN Group of School</a>
+            <nav id="nav-logged-out">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#academics" class="nav-link">Academics</a>
+                <a href="#faculty" class="nav-link">Faculty</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#admissions" class="nav-link">Admissions</a>
+                <a href="#login" class="nav-link login-btn">Login</a>
+            </nav>
+            <nav id="nav-logged-in">
+                <a href="#student-dashboard" class="nav-link">Dashboard</a>
+                <a href="#academics" class="nav-link">Academics</a>
+                 <a href="#faculty" class="nav-link">Faculty</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#" id="logout-btn" class="nav-link login-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ======================= HOME PAGE ======================= -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="container">
+                    <h1 class="animated visible">Empowering Future Leaders</h1>
+                    <p class="animated visible" style="transition-delay: 0.2s;">Fostering curiosity and a passion for learning in a modern, supportive environment.</p>
+                    <a href="#about" class="btn nav-link animated visible" style="transition-delay: 0.4s;">Learn More</a>
+                </div>
+            </section>
+            <section class="features-section">
+                <div class="container">
+                    <div class="features-grid">
+                        <div class="feature-card green animated">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                            <h3>Experienced Teachers</h3>
+                            <p>Our dedicated educators are experts in their fields, committed to student success.</p>
+                        </div>
+                        <div class="feature-card yellow animated" style="transition-delay: 0.2s;">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+                            <h3>Modern Classrooms</h3>
+                            <p>State-of-the-art facilities and technology to enhance the learning experience.</p>
+                        </div>
+                        <div class="feature-card green animated" style="transition-delay: 0.4s;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197" /></svg>
+                            <h3>Sports & Activities</h3>
+                            <p>A wide range of extracurriculars for holistic development.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="testimonials-section animated">
+                <div class="container">
+                    <h2 class="section-title">Testimonials</h2>
+                    <div class="testimonial-container">
+                        <div class="testimonial-card active">
+                             <img src="https://images.unsplash.com/photo-1557053910-d9eadeed1c58?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=100" alt="Parent">
+                             <p>"KN Group of School has been a wonderful experience for our child. The teachers are caring and the curriculum is excellent."</p>
+                             <h4>Mrs. Priya Sharma</h4>
+                        </div>
+                        <div class="testimonial-card">
+                             <img src="https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=100" alt="Parent">
+                             <p>"The focus on both academics and extracurricular activities is fantastic. My son loves going to school every day."</p>
+                             <h4>Mr. John D'souza</h4>
+                        </div>
+                        <div class="testimonial-nav">
+                            <button id="prevBtn">&lt;</button>
+                            <button id="nextBtn">&gt;</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= ABOUT PAGE ======================= -->
+        <div id="about" class="page">
+            <section class="page-content-section">
+                <div class="container">
+                    <div class="about-grid animated">
+                        <div>
+                            <h2 class="section-title" style="text-align: left;">About KN Group of School</h2>
+                            <h3>Our Mission</h3>
+                            <p>To provide a safe, inclusive, and challenging educational environment that empowers students to become lifelong learners, critical thinkers, and responsible global citizens.</p>
+                            <h3>Our History</h3>
+                            <p>Founded in 1998, KN Group of School has grown from a small institution to a leading name in quality education. For over two decades, we have been committed to academic excellence and the holistic development of our students, preparing them for the challenges of the future.</p>
+                        </div>
+                        <div>
+                             <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600" alt="School building">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= ACADEMICS PAGE ======================= -->
+        <div id="academics" class="page">
+             <section class="page-content-section">
+                <div class="container">
+                    <h2 class="section-title animated">Our Academics</h2>
+                    <p class="animated" style="text-align:center; max-width: 700px; margin: -30px auto 50px;">We offer a comprehensive curriculum designed to foster intellectual growth and curiosity from primary to senior secondary levels.</p>
+                    <div class="academics-grid">
+                        <div class="subject-card animated">
+                            <img src="https://images.unsplash.com/photo-1554475901-4538adb7cd23?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Physics">
+                            <div class="subject-card-content">
+                                <h3>Physics</h3>
+                                <p>Exploring the fundamental principles of the universe.</p>
+                            </div>
+                        </div>
+                         <div class="subject-card animated" style="transition-delay: 0.1s;">
+                            <img src="https://images.unsplash.com/photo-1632571401010-35a835702283?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Chemistry">
+                            <div class="subject-card-content">
+                                <h3>Chemistry</h3>
+                                <p>Understanding the composition and properties of matter.</p>
+                            </div>
+                        </div>
+                         <div class="subject-card animated" style="transition-delay: 0.2s;">
+                            <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a134?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Biology">
+                            <div class="subject-card-content">
+                                <h3>Biology</h3>
+                                <p>The science of life and living organisms.</p>
+                            </div>
+                        </div>
+                         <div class="subject-card animated" style="transition-delay: 0.3s;">
+                            <img src="https://images.unsplash.com/photo-1596495577886-d9256f44224b?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Mathematics">
+                            <div class="subject-card-content">
+                                <h3>Mathematics</h3>
+                                <p>Developing logical reasoning and problem-solving skills.</p>
+                            </div>
+                        </div>
+                         <div class="subject-card animated" style="transition-delay: 0.4s;">
+                            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Computer Science">
+                            <div class="subject-card-content">
+                                <h3>Computer Science</h3>
+                                <p>Preparing students for the digital age.</p>
+                            </div>
+                        </div>
+                         <div class="subject-card animated" style="transition-delay: 0.5s;">
+                           <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="English Literature">
+                            <div class="subject-card-content">
+                                <h3>English Literature</h3>
+                                <p>Inspiring a lifelong love for reading and language.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= FACULTY PAGE ======================= -->
+        <div id="faculty" class="page">
+             <section class="page-content-section faculty">
+                <div class="container">
+                    <h2 class="section-title animated">Our Esteemed Faculty</h2>
+                    <div class="faculty-grid">
+                        <!-- Teacher cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= ADMISSIONS PAGE ======================= -->
+        <div id="admissions" class="page">
+             <section class="page-content-section">
+                <div class="container">
+                    <div class="form-container animated">
+                        <h2 class="section-title">Admissions 2025-2026</h2>
+                        <h3>Inquiry Form</h3>
+                        <form>
+                            <div class="form-group"><label for="pname">Parent's Name</label><input type="text" id="pname" required></div>
+                            <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" required></div>
+                            <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" required></div>
+                            <div class="form-group"><label for="message">Your Message</label><textarea id="message" rows="4"></textarea></div>
+                            <button type="submit" class="btn">Submit Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= GALLERY PAGE ======================= -->
+        <div id="gallery" class="page">
+             <section class="page-content-section">
+                <div class="container">
+                    <h2 class="section-title animated">Our Gallery</h2>
+                    <div class="gallery-grid">
+                        <img class="animated" src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                        <img class="animated" src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                        <img class="animated" src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                        <img class="animated" src="https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                        <img class="animated" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                        <img class="animated" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=400" alt="Gallery Image">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= LOGIN PAGE ======================= -->
+        <div id="login" class="page">
+            <section class="page-content-section">
+                <div class="container">
+                     <div class="form-container animated">
+                        <h2 class="section-title">Student & Staff Login</h2>
+                        <form id="login-form">
+                            <div class="form-group"><label for="username">Username / Email</label><input type="text" id="username" required></div>
+                            <div class="form-group"><label for="password">Password</label><input type="password" id="password" required></div>
+                            <button type="submit" class="btn">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ======================= STUDENT DASHBOARD PAGE ======================= -->
+        <div id="student-dashboard" class="page">
+            <section class="page-content-section dashboard">
+                <div class="container">
+                    <div class="dashboard-header animated">
+                         <h2 class="section-title">Welcome, Student!</h2>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card live-class-card animated">
+                            <h3>Your Next Class: <strong>Mathematics</strong></h3>
+                            <p>Starts in: 15 Minutes</p>
+                            <a href="#live-class" id="join-class-btn" class="btn nav-link">Join Live Class Now</a>
+                        </div>
+                        <div class="dashboard-card animated" style="transition-delay: 0.2s;">
+                            <h3>Attendance</h3>
+                            <p>Your overall attendance is <strong>92%</strong>.</p>
+                            <p>Keep up the great work!</p>
+                        </div>
+                         <div class="dashboard-card animated" style="transition-delay: 0.4s;">
+                            <h3>Fees Status</h3>
+                            <div class="fees-details">
+                                <p>Tution Fees: <span>Paid</span></p>
+                                <p>Transport Fees: <span class="status-pending">Due</span></p>
+                            </div>
+                            <a href="#" class="btn btn-primary" style="margin-top: 15px;">Pay Now</a>
+                        </div>
+                        <div class="dashboard-card animated" style="grid-column: 1 / -1; transition-delay: 0.6s;">
+                            <h3>Pending Homework</h3>
+                            <table class="homework-table">
+                                <thead>
+                                    <tr><th>Subject</th><th>Assignment</th><th>Due Date</th><th>Status</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Physics</td><td>Chapter 3 Questions</td><td>28-Sep-2025</td><td><span class="status-submitted">Submitted</span></td></tr>
+                                    <tr><td>English</td><td>Essay on "My Hero"</td><td>29-Sep-2025</td><td><span class="status-pending">Pending</span></td></tr>
+                                    <tr><td>Chemistry</td><td>Practial File Submission</td><td>30-Sep-2025</td><td><span class="status-pending">Pending</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ======================= LIVE CLASS PAGE ======================= -->
+        <div id="live-class" class="page page-full">
+            <div class="live-class-wrapper">
+                <div class="video-panel">
+                    <div class="video-feed"><span>Teacher's Screen Share</span></div>
+                    <div class="video-controls">
+                        <button class="control-btn">🎤</button>
+                        <button class="control-btn">📷</button>
+                        <button class="control-btn btn-danger" id="leave-class-btn">Leave</button>
+                    </div>
+                </div>
+                <div class="chat-panel">
+                    <h3>Live Class Chat</h3>
+                    <div class="chat-messages" id="chat-messages">
+                         <div class="chat-message teacher">
+                            <div class="msg-sender">Teacher</div>
+                            <div class="msg-bubble">Good morning, class! Today we will continue with Algebra.</div>
+                        </div>
+                    </div>
+                    <div class="class-actions">
+                        <button class="btn btn-primary" id="raise-hand-btn" style="width:100%;">✋ Raise Hand</button>
+                    </div>
+                    <form class="chat-input" id="chat-form">
+                        <input type="text" id="chat-input-box" placeholder="Type your query...">
+                        <button type="submit">➤</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- ======================= TEACHER PROFILE MODAL ======================= -->
+    <div id="teacher-profile-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="profile-photo">
+                <img id="modal-teacher-img" src="" alt="Teacher Photo">
+            </div>
+            <div class="profile-details">
+                <h2 id="modal-teacher-name"></h2>
+                <p id="modal-teacher-qualification"></p>
+                <p><strong>Experience:</strong> <span id="modal-teacher-experience"></span></p>
+                <p><strong>Class Advisor:</strong> <span id="modal-teacher-advisor"></span></p>
+                <div>
+                    <strong>Subjects:</strong>
+                    <div id="modal-teacher-subjects" style="margin-top: 5px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer style="display: block;">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>KN Group of School</h4>
+                    <p>128 School St, City, State 12345</p>
+                    <p>contact@kngroup.edu</p>
+                </div>
+                 <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#academics" class="nav-link">Academics</a>
+                    <a href="#admissions" class="nav-link">Admissions</a>
+                </div>
+                 <div class="footer-col">
+                    <h4>Social Links</h4>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const loginForm = document.getElementById('login-form');
+            const logoutBtn = document.getElementById('logout-btn');
+            const navLoggedOut = document.getElementById('nav-logged-out');
+            const navLoggedIn = document.getElementById('nav-logged-in');
+            const footer = document.querySelector('footer');
+
+            const teachersData = [
+                { id: 1, name: 'Dr. Ramesh Gupta', qualification: 'Ph.D. in Physics', experience: '15 Years', advisor: 'Grade 12-A', subjects: ['Physics', 'Advanced Physics'], photo: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=200' },
+                { id: 2, name: 'Mrs. Sunita Singh', qualification: 'M.A. in English Literature', experience: '10 Years', advisor: 'Grade 10-B', subjects: ['English', 'History'], photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29130?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=200' },
+                { id: 3, name: 'Mr. Vikram Rathore', qualification: 'M.Sc. in Mathematics', experience: '12 Years', advisor: 'Grade 11-C', subjects: ['Mathematics', 'Statistics'], photo: 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=200' },
+                { id: 4, name: 'Ms. Anjali Verma', qualification: 'M.Sc. in Chemistry', experience: '8 Years', advisor: 'Grade 9-A', subjects: ['Chemistry', 'Biology'], photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=200' },
+            ];
+
+            // --- Populate Faculty Page ---
+            const facultyGrid = document.querySelector('.faculty-grid');
+            if (facultyGrid) {
+                teachersData.forEach((teacher, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'teacher-card animated';
+                    card.style.transitionDelay = `${index * 0.1}s`;
+                    card.innerHTML = `
+                        <img src="${teacher.photo}" alt="${teacher.name}">
+                        <div class="teacher-card-content">
+                            <h3>${teacher.name}</h3>
+                            <p>${teacher.qualification}</p>
+                            <button class="btn btn-primary view-profile-btn" data-teacher-id="${teacher.id}">View Profile</button>
+                        </div>
+                    `;
+                    facultyGrid.appendChild(card);
+                });
+            }
+
+            // --- Page Navigation ---
+            function showPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                if (pageId === 'live-class') { footer.style.display = 'none'; } 
+                else { footer.style.display = 'block'; }
+
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === '#' + pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                window.scrollTo(0,0);
+                
+                const animatedElements = document.querySelectorAll(`#${pageId} .animated`);
+                animatedElements.forEach(el => observer.observe(el));
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('href').substring(1);
+                    showPage(pageId);
+                });
+            });
+
+            // --- Testimonial Slider ---
+            const testimonials = document.querySelectorAll('.testimonial-card');
+            if (testimonials.length > 0) {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                let currentTestimonial = 0;
+
+                function showTestimonial(index) {
+                    testimonials.forEach((card, i) => {
+                        card.classList.remove('active');
+                        if (i === index) { card.classList.add('active'); }
+                    });
+                }
+                prevBtn.addEventListener('click', () => {
+                    currentTestimonial = (currentTestimonial > 0) ? currentTestimonial - 1 : testimonials.length - 1;
+                    showTestimonial(currentTestimonial);
+                });
+                nextBtn.addEventListener('click', () => {
+                    currentTestimonial = (currentTestimonial < testimonials.length - 1) ? currentTestimonial + 1 : 0;
+                    showTestimonial(currentTestimonial);
+                });
+            }
+
+            // --- Login/Logout Logic ---
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                navLoggedOut.style.display = 'none';
+                navLoggedIn.style.display = 'block';
+                showPage('student-dashboard');
+            });
+
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLoggedIn.style.display = 'none';
+                navLoggedOut.style.display = 'block';
+                showPage('home');
+            });
+            
+            // --- Live Class Logic ---
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input-box');
+            const chatMessages = document.getElementById('chat-messages');
+            const raiseHandBtn = document.getElementById('raise-hand-btn');
+            const leaveClassBtn = document.getElementById('leave-class-btn');
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                    const studentMsg = document.createElement('div');
+                    studentMsg.className = 'chat-message student';
+                    studentMsg.innerHTML = `<div class="msg-sender">You</div><div class="msg-bubble">${messageText}</div>`;
+                    chatMessages.appendChild(studentMsg);
+                    chatInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    setTimeout(() => {
+                        const teacherMsg = document.createElement('div');
+                        teacherMsg.className = 'chat-message teacher';
+                        teacherMsg.innerHTML = `<div class="msg-sender">Teacher</div><div class="msg-bubble">That's a great question! Let me explain...</div>`;
+                        chatMessages.appendChild(teacherMsg);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1500);
+                }
+            });
+
+            raiseHandBtn.addEventListener('click', () => {
+                raiseHandBtn.classList.toggle('active');
+                if (raiseHandBtn.classList.contains('active')) {
+                    raiseHandBtn.textContent = '✋ Hand Raised';
+                    raiseHandBtn.style.backgroundColor = '#27ae60';
+                } else {
+                    raiseHandBtn.textContent = '✋ Raise Hand';
+                    raiseHandBtn.style.backgroundColor = 'var(--primary-color)';
+                }
+            });
+
+            leaveClassBtn.addEventListener('click', () => {
+                showPage('student-dashboard');
+            });
+
+            // --- Teacher Profile Modal Logic ---
+            const modal = document.getElementById('teacher-profile-modal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+
+            document.addEventListener('click', function(e) {
+                if(e.target.classList.contains('view-profile-btn')) {
+                    const teacherId = parseInt(e.target.dataset.teacherId);
+                    const teacher = teachersData.find(t => t.id === teacherId);
+
+                    if (teacher) {
+                        document.getElementById('modal-teacher-img').src = teacher.photo;
+                        document.getElementById('modal-teacher-name').textContent = teacher.name;
+                        document.getElementById('modal-teacher-qualification').textContent = teacher.qualification;
+                        document.getElementById('modal-teacher-experience').textContent = teacher.experience;
+                        document.getElementById('modal-teacher-advisor').textContent = teacher.advisor;
+                        
+                        const subjectsEl = document.getElementById('modal-teacher-subjects');
+                        subjectsEl.innerHTML = '';
+                        teacher.subjects.forEach(sub => {
+                            const tag = document.createElement('span');
+                            tag.className = 'tag';
+                            tag.textContent = sub;
+                            subjectsEl.appendChild(tag);
+                        });
+                        
+                        modal.style.display = 'flex';
+                    }
+                }
+            });
+
+            function closeModal() {
+                 modal.style.display = 'none';
+            }
+            modalCloseBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+
+            // --- On-scroll animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const initialAnimatedElements = document.querySelectorAll('.page.active .animated');
+            initialAnimatedElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
+
